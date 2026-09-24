@@ -1,0 +1,19 @@
+# Runtime
+nova-act[cli]>=3.0.0
+bedrock-agentcore>=1.18.1  # CVE-2026-16796 — argument delimiter injection in install_packages()
+boto3>=1.35.0
+pydantic>=2.0.0
+requests>=2.31.0
+
+# Infrastructure (CDK)
+aws-cdk-lib>=2.100.0
+constructs>=10.0.0
+cdk-nag>=2.28.0,<3.0.0  # NagSuppressions is top-level in 2.x; removed in 3.x
+
+# Security: CVE floor pins (all transitive — enforced here to guarantee safe minimum versions)
+aiohttp>=3.14.1           # CVE-2026-34520 (critical) + 18 high + 18 medium aiohttp CVEs
+Pillow>=12.3.0            # 14 high Pillow CVEs (OOB writes, heap corruption, decompression bombs)
+python-multipart>=0.0.32  # 3 high CVEs (arbitrary file write, DoS, smuggling)
+idna>=3.14                # CVE-2026-45409 — DoS via long domain labels
+filelock>=3.16.0          # CVE-2025-68146, CVE-2026-22701 — TOCTOU symlink attacks
+py>=1.11.0                # CVE-2020-29651 — regex DoS in py.path.svnwc
